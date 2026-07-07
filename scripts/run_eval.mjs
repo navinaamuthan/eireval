@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * EirEval runner. Usage:
- *   ANTHROPIC_API_KEY=... OPENAI_API_KEY=... GOOGLE_API_KEY=... node scripts/run_eval.mjs
+ *   ANTHROPIC_API_KEY=... OPENAI_API_KEY=... GOOGLE_API_KEY=... GROQ_API_KEY=... node scripts/run_eval.mjs
  * Reads data/questions.json, queries each configured model, grades, writes results/results.json.
  * Providers without a key are skipped. Requires Node 18+ (global fetch).
  */
@@ -18,6 +18,7 @@ const MODELS = [
   { provider: "anthropic", id: "claude-haiku-4-5-20251001", label: "Claude Haiku 4.5" },
   { provider: "openai", id: "gpt-4o", label: "GPT-4o" },
   { provider: "google", id: "gemini-2.0-flash", label: "Gemini 2.0 Flash" },
+  { provider: "groq", id: "llama-3.3-70b-versatile", label: "Llama 3.3 70B (Groq)" },
 ];
 const CONFIDENT_THRESHOLD = 80; // wrong + confidence >= this = "confidently wrong"
 
@@ -63,8 +64,25 @@ async function askGoogle(model, q) {
   return j.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 }
 
-const ASK = { anthropic: askAnthropic, openai: askOpenAI, google: askGoogle };
-const KEY = { anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY", google: "GOOGLE_API_KEY" };
+async function askGroq(model, q) {
+  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: { authorization: `Bearer ${process.env.GROQ_API_KEY}`, "content-type": "application/json" },
+    body: JSON.stringify({
+      model,
+      max_tokens: 100,
+      temperature: 0,
+      response_format: { type: "json_object" },
+      messages: [{ role: "system", content: SYSTEM }, { role: "user", content: userPrompt(q) }],
+    }),
+  });
+  if (!r.ok) throw new Error(`groq ${r.status}: ${await r.text()}`);
+  const j = await r.json();
+  return j.choices?.[0]?.message?.content ?? "";
+}
+
+const ASK = { anthropic: askAnthropic, openai: askOpenAI, google: askGoogle, groq: askGroq };
+const KEY = { anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY", google: "GOOGLE_API_KEY", groq: "GROQ_API_KEY" };
 
 function parseResponse(text) {
   const m = text.match(/\{[\s\S]*\}/);
@@ -132,7 +150,7 @@ async function evalModel(model) {
 
 const runnable = MODELS.filter((m) => process.env[KEY[m.provider]]);
 if (!runnable.length) {
-  console.error("No API keys found. Set at least one of ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY (see .env.example).");
+  console.error("No API keys found. Set at least one of ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY / GROQ_API_KEY (see .env.example).");
   process.exit(1);
 }
 console.log(`EirEval: ${questions.length} questions × ${runnable.length} models (skipping ${MODELS.length - runnable.length} without keys)\n`);

@@ -14,7 +14,7 @@ Built by [Navina Ganapathy Amuthan](https://navinaamuthan.vercel.app) · dataset
 
 ```bash
 npm install
-cp .env.example .env        # add ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY (any subset)
+cp .env.example .env        # add ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY / GROQ_API_KEY (any subset)
 npm run eval                # queries the models, writes results/results.json (~5 min)
 npm run dev                 # view at localhost:3000
 ```

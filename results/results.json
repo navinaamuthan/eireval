@@ -1,31 +1,378 @@
 {
   "meta": {
     "name": "EirEval v0.1",
-    "generated_at": "2026-07-07T00:00:00.000Z",
-    "sample": true,
-    "confident_threshold": 80,
-    "note": "SAMPLE DATA for layout preview only. Numbers are illustrative, not measured. Run `npm run eval` with API keys to produce real results."
+    "description": "An evaluation of LLM knowledge of Irish and EU financial regulation. Multiple choice with abstention. Every item cites its source instrument. Items are marked verified:false until checked against the source text by a human.",
+    "author": "Navina Ganapathy Amuthan",
+    "created": "2026-07-07",
+    "target_size": 150,
+    "license": "CC-BY-4.0",
+    "generated_at": "2026-07-07T22:51:41.395Z",
+    "sample": false,
+    "confident_threshold": 80
   },
   "models": [
     {
-      "label": "Claude Sonnet 5",
-      "provider": "anthropic",
-      "model": "claude-sonnet-5",
+      "label": "Llama 3.3 70B (Groq)",
+      "provider": "groq",
+      "model": "llama-3.3-70b-versatile",
       "total": 36,
-      "accuracy": 0,
+      "accuracy": 88.9,
       "abstainRate": 0,
-      "confidentlyWrongRate": 0,
-      "meanConfidenceWhenRight": null,
-      "meanConfidenceWhenWrong": null,
+      "confidentlyWrongRate": 11.1,
+      "meanConfidenceWhenRight": 92,
+      "meanConfidenceWhenWrong": 88,
       "byDomain": {
-        "Consumer Protection": { "total": 6, "correct": 0 },
-        "MiFID II & Investor Protection": { "total": 6, "correct": 0 },
-        "AML / CFT": { "total": 6, "correct": 0 },
-        "Banking & Payments": { "total": 6, "correct": 0 },
-        "Central Bank Regime": { "total": 6, "correct": 0 },
-        "AI & Data in Finance": { "total": 6, "correct": 0 }
+        "Consumer Protection": {
+          "total": 6,
+          "correct": 6
+        },
+        "MiFID II & Investor Protection": {
+          "total": 6,
+          "correct": 5
+        },
+        "AML / CFT": {
+          "total": 6,
+          "correct": 5
+        },
+        "Banking & Payments": {
+          "total": 6,
+          "correct": 5
+        },
+        "Central Bank Regime": {
+          "total": 6,
+          "correct": 6
+        },
+        "AI & Data in Finance": {
+          "total": 6,
+          "correct": 5
+        }
       },
-      "rows": []
+      "rows": [
+        {
+          "id": "CP-01",
+          "domain": "Consumer Protection",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CP-02",
+          "domain": "Consumer Protection",
+          "answer": "C",
+          "confidence": 90,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "CP-03",
+          "domain": "Consumer Protection",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CP-04",
+          "domain": "Consumer Protection",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CP-05",
+          "domain": "Consumer Protection",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CP-06",
+          "domain": "Consumer Protection",
+          "answer": "B",
+          "confidence": 80,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-01",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "B",
+          "confidence": 100,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-02",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-03",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "A",
+          "confidence": 90,
+          "correct": false,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-04",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-05",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "MF-06",
+          "domain": "MiFID II & Investor Protection",
+          "answer": "D",
+          "confidence": 100,
+          "correct": true,
+          "expected": "D",
+          "error": null
+        },
+        {
+          "id": "AML-01",
+          "domain": "AML / CFT",
+          "answer": "A",
+          "confidence": 90,
+          "correct": true,
+          "expected": "A",
+          "error": null
+        },
+        {
+          "id": "AML-02",
+          "domain": "AML / CFT",
+          "answer": "C",
+          "confidence": 80,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "AML-03",
+          "domain": "AML / CFT",
+          "answer": "C",
+          "confidence": 95,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "AML-04",
+          "domain": "AML / CFT",
+          "answer": "A",
+          "confidence": 90,
+          "correct": false,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "AML-05",
+          "domain": "AML / CFT",
+          "answer": "C",
+          "confidence": 90,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "AML-06",
+          "domain": "AML / CFT",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "BP-01",
+          "domain": "Banking & Payments",
+          "answer": "B",
+          "confidence": 100,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "BP-02",
+          "domain": "Banking & Payments",
+          "answer": "B",
+          "confidence": 100,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "BP-03",
+          "domain": "Banking & Payments",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "BP-04",
+          "domain": "Banking & Payments",
+          "answer": "C",
+          "confidence": 90,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "BP-05",
+          "domain": "Banking & Payments",
+          "answer": "C",
+          "confidence": 80,
+          "correct": true,
+          "expected": "C",
+          "error": null
+        },
+        {
+          "id": "BP-06",
+          "domain": "Banking & Payments",
+          "answer": "A",
+          "confidence": 90,
+          "correct": false,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-01",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-02",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-03",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-04",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 100,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-05",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "CB-06",
+          "domain": "Central Bank Regime",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": null
+        },
+        {
+          "id": "AI-01",
+          "domain": "AI & Data in Finance",
+          "answer": "B",
+          "confidence": 90,
+          "correct": true,
+          "expected": "B",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        },
+        {
+          "id": "AI-02",
+          "domain": "AI & Data in Finance",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        },
+        {
+          "id": "AI-03",
+          "domain": "AI & Data in Finance",
+          "answer": "C",
+          "confidence": 80,
+          "correct": true,
+          "expected": "C",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        },
+        {
+          "id": "AI-04",
+          "domain": "AI & Data in Finance",
+          "answer": "B",
+          "confidence": 80,
+          "correct": false,
+          "expected": "C",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        },
+        {
+          "id": "AI-05",
+          "domain": "AI & Data in Finance",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        },
+        {
+          "id": "AI-06",
+          "domain": "AI & Data in Finance",
+          "answer": "B",
+          "confidence": 95,
+          "correct": true,
+          "expected": "B",
+          "error": "groq 429: {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kkj1cmx8feg84n8m5yvvzp95` service tier `on_demand` on requests per minute (RPM): Limit 30, "
+        }
+      ]
     }
   ]
 }
