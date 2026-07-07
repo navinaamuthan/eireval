@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-paper text-ink antialiased;
+}
+
+.card {
+  @apply bg-white/70 border border-sand rounded-2xl;
+}
+
+.eyebrow {
+  @apply font-mono text-[11px] uppercase tracking-[0.25em] text-clay;
+}
